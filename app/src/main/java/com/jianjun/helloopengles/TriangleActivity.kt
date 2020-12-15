@@ -2,10 +2,13 @@ package com.jianjun.helloopengles
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.os.Bundle
-import java.io.File
+import android.util.Log
+import android.view.ViewGroup
+import android.widget.Button
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -19,6 +22,22 @@ class TriangleActivity : Activity() {
         super.onCreate(savedInstanceState)
         val view = TriangleSurfaceView(this)
         setContentView(view)
+
+        //test GLSurfaceView's lifecycle
+        val testBtn = Button(this)
+        testBtn.text = "Show New"
+        testBtn.setOnClickListener {
+            startActivity(Intent(this, TriangleActivity::class.java).apply {
+
+            })
+        }
+        addContentView(
+            testBtn,
+            ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        )
     }
 
     public class TriangleSurfaceView(context: Context?) : GLSurfaceView(context) {
@@ -40,16 +59,20 @@ class TriangleActivity : Activity() {
          */
         private var triangle: Triangle? = null
         override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
+            Log.i("TriangleActivity", "onSurfaceCreated: $this")
             //set background color
             GLES20.glClearColor(0f, 0f, 0f, 1f)
             triangle = Triangle()
         }
 
         /**
+         *
+         * when surface changed
          * Called if the geometry of the view changes,
          * for example when the device's screen orientation changes.
          */
         override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
+            Log.i("TriangleActivity", "onSurfaceChanged: $this")
             GLES20.glViewport(0, 0, width, height)
         }
 
@@ -175,6 +198,10 @@ class TriangleActivity : Activity() {
                 // Disable vertex array
                 GLES20.glDisableVertexAttribArray(it)
             }
+        }
+
+        companion object {
+            const val TAG = "TriangleActivity"
         }
     }
 }
