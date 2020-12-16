@@ -46,7 +46,16 @@ class AirHockeyActivity : AppCompatActivity() {
             //point1
             0f, 0.25f, 0f,
             //point2
-            0f, -0.25f, 0f
+            0f, -0.25f, 0f,
+            //border
+            -0.55f, -0.55f, 0f,
+            0.55f, 0.55f, 0f,
+            -0.55f, 0.55f, 0f,
+            -0.55f, -0.55f, 0f,
+            0.55f, 0.55f, 0f,
+            0.55f, -0.55f, 0f,
+            //ice ball
+            0f, 0f, 0f,
         )
         val vertexData = ByteBuffer.allocateDirect(tableVertices.size * 4)//float 数字有四个字节
             .order(ByteOrder.nativeOrder())
@@ -108,6 +117,10 @@ class AirHockeyActivity : AppCompatActivity() {
         override fun onDrawFrame(gl: GL10?) {
             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
 
+            //border
+            GLES20.glUniform4f(uColorLocation, 0.52f, 0.73f, 0.94f, 1f)
+            GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 10, 6)
+
             //与 shader 中的 vec4 匹配
             // ↓ 指定颜色
             GLES20.glUniform4f(uColorLocation, 1f, 1f, 1f, 1f)
@@ -121,6 +134,10 @@ class AirHockeyActivity : AppCompatActivity() {
             //draw point
             GLES20.glUniform4f(uColorLocation, 0f, 0f, 0f, 1f)
             GLES20.glDrawArrays(GLES20.GL_POINTS, 8, 2)
+
+            //draw ice ball
+            GLES20.glUniform4f(uColorLocation, 0.52f, 0.73f, 0.94f, 1f)
+            GLES20.glDrawArrays(GLES20.GL_POINTS, 16, 1)
         }
     }
 
