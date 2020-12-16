@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TriangleActivity" />
+        <activity android:name=".airhockey.AirHockeyActivity" />
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.jianjun.helloopengles.airhockey.AirHockeyActivity
 import com.jianjun.helloopengles.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnTriangle.setOnClickListener(this)
+        binding.btnAirHockey.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (v) {
             binding.btnTriangle -> {
                 intent.setClass(this, TriangleActivity::class.java)
+            }
+            binding.btnAirHockey -> {
+                intent.setClass(this, AirHockeyActivity::class.java)
             }
             else -> return
         }

@@ -16,6 +16,11 @@
             android:layout_height="wrap_content"
             android:text="draw a triangle" />
 
+        <Button
+            android:id="@+id/btn_air_hockey"
+            android:text="air hockey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

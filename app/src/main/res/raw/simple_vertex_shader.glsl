@@ -8,4 +8,5 @@ attribute vec4 a_Position;
 void main() {
     //must init the gl_Position
     gl_Position = a_Position;
+    gl_PointSize = 10.0;//gl_Position为中心的四边形，四条边的长度等于 gl_PointSize
 }
