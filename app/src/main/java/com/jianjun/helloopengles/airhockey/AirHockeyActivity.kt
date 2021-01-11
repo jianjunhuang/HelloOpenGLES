@@ -33,44 +33,45 @@ class AirHockeyActivity : AppCompatActivity() {
         private var aColorLocation: Int = 0
         private var aPositionLocation: Int = 0
         private val projectMatrix = FloatArray(16)
+        private val modelMatrix = FloatArray(16)
         private var uMatrixLocation = 0
 
-        // x, y, z, R, G, B
+        // x, y, R, G, B
         val tableVertices = floatArrayOf(
             //三角扇形, 后三位 R,G,B
-            0f, 0f, 0f, 1f, 1f, 1f,
-            -0.5f, -0.8f, 0f, 0.7f, 0.7f, 0.7f,
-            -0.25f, -0.8f, 0f, 0.7f, 0.7f, 0.7f,
-            0f, -0.8f, 0f, 0.7f, 0.7f, 0.7f,
-            0.25f, -0.8f, 0f, 0.7f, 0.7f, 0.7f,
-            0.5f, -0.8f, 0f, 0.7f, 0.7f, 0.7f,
-            0.5f, -0.55f, 0f, 0.7f, 0.7f, 0.7f,
-            0.5f, 0f, 0f, 0.7f, 0.7f, 0.7f,
-            0.5f, 0.55f, 0f, 0.7f, 0.7f, 0.7f,
-            0.5f, 0.8f, 0f, 0.7f, 0.7f, 0.7f,
-            0.25f, 0.8f, 0f, 0.7f, 0.7f, 0.7f,
-            0f, 0.8f, 0f, 0.7f, 0.7f, 0.7f,
-            -0.25f, 0.8f, 0f, 0.7f, 0.7f, 0.7f,
-            -0.5f, 0.8f, 0f, 0.7f, 0.7f, 0.7f,
-            -0.5f, 0.35f, 0f, 0.7f, 0.7f, 0.7f,
-            -0.5f, 0f, 0f, 0.7f, 0.7f, 0.7f,
-            -0.5f, -0.35f, 0f, 0.7f, 0.7f, 0.7f,
-            -0.5f, -0.8f, 0f, 0.7f, 0.7f, 0.7f,
+            0f, 0f, 1f, 1f, 1f,
+            -0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
+            -0.25f, -0.8f, 0.7f, 0.7f, 0.7f,
+            0f, -0.8f, 0.7f, 0.7f, 0.7f,
+            0.25f, -0.8f, 0.7f, 0.7f, 0.7f,
+            0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
+            0.5f, -0.55f, 0.7f, 0.7f, 0.7f,
+            0.5f, 0f, 0.7f, 0.7f, 0.7f,
+            0.5f, 0.55f, 0.7f, 0.7f, 0.7f,
+            0.5f, 0.8f, 0.7f, 0.7f, 0.7f,
+            0.25f, 0.8f, 0.7f, 0.7f, 0.7f,
+            0f, 0.8f, 0.7f, 0.7f, 0.7f,
+            -0.25f, 0.8f, 0.7f, 0.7f, 0.7f,
+            -0.5f, 0.8f, 0.7f, 0.7f, 0.7f,
+            -0.5f, 0.35f, 0.7f, 0.7f, 0.7f,
+            -0.5f, 0f, 0.7f, 0.7f, 0.7f,
+            -0.5f, -0.35f, 0.7f, 0.7f, 0.7f,
+            -0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
 
             //line1
-            -0.5f, 0f, 0f, 0f, 0f, 0f,
-            0.5f, 0f, 0f, 1f, 1f, 1f,
+            -0.5f, 0f, 0f, 0f, 0f,
+            0.5f, 0f, 1f, 1f, 1f,
             //point1
-            0f, 0.25f, 0f, 0f, 0f, 0f,
+            0f, 0.25f, 0f, 0f, 0f,
             //point2
-            0f, -0.25f, 0f, 0f, 0f, 0f,
+            0f, -0.25f, 0f, 0f, 0f,
             //border
-            -0.55f, -0.85f, 0f, 0.52f, 0.73f, 0.94f,
-            0.55f, 0.85f, 0f, 0.52f, 0.73f, 0.94f,
-            -0.55f, 0.85f, 0f, 0.52f, 0.73f, 0.94f,
-            -0.55f, -0.85f, 0f, 0.52f, 0.73f, 0.94f,
-            0.55f, 0.85f, 0f, 0.52f, 0.73f, 0.94f,
-            0.55f, -0.85f, 0f, 0.52f, 0.73f, 0.94f,
+            -0.55f, -0.85f, 0.52f, 0.73f, 0.94f,
+            0.55f, 0.85f, 0.52f, 0.73f, 0.94f,
+            -0.55f, 0.85f, 0.52f, 0.73f, 0.94f,
+            -0.55f, -0.85f, 0.52f, 0.73f, 0.94f,
+            0.55f, 0.85f, 0.52f, 0.73f, 0.94f,
+            0.55f, -0.85f, 0.52f, 0.73f, 0.94f,
             //ice ball
             0f, 0f, 0f, 0.52f, 0.73f, 0.94f
         )
@@ -85,7 +86,7 @@ class AirHockeyActivity : AppCompatActivity() {
             const val TAG = "AirHockeyRender"
 
             //顶点的分量 x,y,z
-            const val POSITION_COMPONENT_COUNT = 3
+            const val POSITION_COMPONENT_COUNT = 2
             const val COLOR_COMPONENT_COUNT = 3
             const val STRIDE = (POSITION_COMPONENT_COUNT + COLOR_COMPONENT_COUNT) * 4
 
@@ -161,17 +162,31 @@ class AirHockeyActivity : AppCompatActivity() {
 
         override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
             GLES20.glViewport(0, 0, width, height)
-            val aspectRatio = if (width > height) {
-                width / height.toFloat()
-            } else {
-                height / width.toFloat()
-            }
-            if (width > height) {
-                //landscape
-                Matrix.orthoM(projectMatrix, 0, -aspectRatio, aspectRatio, -1f, 1f, -1f, 1f)
-            } else {
-                Matrix.orthoM(projectMatrix, 0, -1f, 1f, -aspectRatio, aspectRatio, -1f, 1f)
-            }
+//            val aspectRatio = if (width > height) {
+//                width / height.toFloat()
+//            } else {
+//                height / width.toFloat()
+//            }
+//            if (width > height) {
+//                //landscape
+//                Matrix.orthoM(projectMatrix, 0, -aspectRatio, aspectRatio, -1f, 1f, -1f, 1f)
+//            } else {
+//                Matrix.orthoM(projectMatrix, 0, -1f, 1f, -aspectRatio, aspectRatio, -1f, 1f)
+//            }
+            //创建 45度的视野创建透视投影， z 为 -1 开始，-10 结束
+            Matrix.perspectiveM(projectMatrix, 0, 45f, width / height.toFloat(), 1f, 10f)
+
+            //move table z -2
+            Matrix.setIdentityM(modelMatrix, 0)
+            Matrix.translateM(modelMatrix, 0, 0f, 0f, -2f)
+
+            //增加旋转
+            Matrix.translateM(modelMatrix, 0, 0f, 0f, -2f)
+            Matrix.rotateM(modelMatrix, 0, -60f, 1f, 0f, 0f)
+
+            val tempFloatArray = FloatArray(16)
+            Matrix.multiplyMM(tempFloatArray, 0, projectMatrix, 0, modelMatrix, 0)
+            System.arraycopy(tempFloatArray, 0, projectMatrix, 0, tempFloatArray.size)
         }
 
         override fun onDrawFrame(gl: GL10?) {
