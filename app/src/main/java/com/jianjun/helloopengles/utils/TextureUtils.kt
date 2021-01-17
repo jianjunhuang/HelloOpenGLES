@@ -41,6 +41,7 @@ object TextureUtils {
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0)
         bmp.recycle()
         GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
+        //加载完后与这个纹理解绑，避免用到其他纹理方法意外改变这个纹理
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0)
         return textureObjIds[0]
     }
