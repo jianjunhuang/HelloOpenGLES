@@ -1,14 +1,35 @@
 package com.jianjun.helloopengles.airhockey.objects
 
 import android.opengl.GLES20
+import com.jianjun.helloopengles.program.TextureShaderProgram
 import com.jianjun.helloopengles.utils.VertexArray
 
 class Table {
 
     private val vertexArray = VertexArray(VERTEX_DTA)
 
-    fun bindData() {
-        
+    /**
+     * 绑定到着色器程序上
+     */
+    fun bindData(textureProgram: TextureShaderProgram) {
+        //绑定位置数据
+        vertexArray.setVertexAttributePointer(
+            0,
+            textureProgram.aPositionLocation,
+            POSITION_COMPONENT_COUNT,
+            STRIDE
+        )
+        //绑定坐标数据
+        vertexArray.setVertexAttributePointer(
+            POSITION_COMPONENT_COUNT,
+            textureProgram.aTextureCoordinatesLocation,
+            TEXTURE_COORDINATES_COMPONENT_COUNT,
+            STRIDE
+        )
+    }
+
+    fun draw() {
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, 6)
     }
 
     companion object {

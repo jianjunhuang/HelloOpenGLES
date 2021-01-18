@@ -21,6 +21,12 @@
             android:text="air hockey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_air_hockey2"
+            android:text="air hockey2 - draw texture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

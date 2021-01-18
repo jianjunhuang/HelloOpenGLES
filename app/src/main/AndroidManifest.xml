@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".TriangleActivity" />
         <activity android:name=".airhockey.AirHockeyActivity" />
+        <activity android:name=".airhockey.AirHockey2Activity" />
     </application>
 
 </manifest>

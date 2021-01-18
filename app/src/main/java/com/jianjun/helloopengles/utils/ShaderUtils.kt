@@ -83,5 +83,18 @@ object ShaderUtils {
         return compileStatus
     }
 
+    /**
+     *
+     */
+    fun buildProgram(vertexShaderSource: String, fragmentShaderSource: String): Int {
+        //compile the shader
+        val vertexShader = compileVertexShader(vertexShaderSource)
+        val fragmentShader = compileFragmentShader(fragmentShaderSource)
+
+        //link them into a shader program
+        val program = linkProgram(vertexShader, fragmentShader)
+        return program
+    }
+
     const val TAG = "ShaderUtils"
 }
